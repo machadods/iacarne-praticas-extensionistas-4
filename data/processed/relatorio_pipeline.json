@@ -1,0 +1,666 @@
+{
+  "colunas_saida": [
+    "registro_id",
+    "data",
+    "produto_id",
+    "corte",
+    "categoria_anatomica",
+    "perfil_uso",
+    "preco_venda_kg",
+    "promocao",
+    "desconto_pct",
+    "estoque_inicial_kg",
+    "entrada_kg",
+    "estoque_disponivel_kg",
+    "quantidade_vendida_kg",
+    "perda_kg",
+    "estoque_final_kg",
+    "ruptura_estoque",
+    "receita_bruta_rs",
+    "custo_estimado_kg",
+    "custo_total_estimado_rs",
+    "margem_bruta_estimada_rs",
+    "dia_semana",
+    "fim_de_semana",
+    "evento_calendario",
+    "mes",
+    "ano",
+    "semana_ano",
+    "estoque_inicial_reconstruido",
+    "ano_semana_iso"
+  ],
+  "correcoes": [
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "0.00",
+      "registro_id": "2025-09-01_picanha",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "3.17",
+      "registro_id": "2025-09-02_maminha",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  PICANHA  ",
+      "campo": "corte",
+      "depois": "Picanha",
+      "registro_id": "2025-09-04_picanha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "paleta",
+      "campo": "corte",
+      "depois": "Paleta",
+      "registro_id": "2025-09-06_paleta",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "ponta de peito",
+      "campo": "corte",
+      "depois": "Ponta de Peito",
+      "registro_id": "2025-09-13_ponta_de_peito",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "48,47",
+      "campo": "preco_venda_kg",
+      "depois": "48.47",
+      "registro_id": "2025-09-19_cupim",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "coxão duro",
+      "campo": "corte",
+      "depois": "Coxão Duro",
+      "registro_id": "2025-09-21_coxao_duro",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "2.05",
+      "registro_id": "2025-09-23_file_mignon",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "49,90",
+      "campo": "preco_venda_kg",
+      "depois": "49.90",
+      "registro_id": "2025-10-04_coxao_mole",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "0.00",
+      "registro_id": "2025-10-12_vazio",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "42,93",
+      "campo": "preco_venda_kg",
+      "depois": "42.93",
+      "registro_id": "2025-10-14_vazio",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "  PONTA DE PEITO  ",
+      "campo": "corte",
+      "depois": "Ponta de Peito",
+      "registro_id": "2025-10-30_ponta_de_peito",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  CUPIM  ",
+      "campo": "corte",
+      "depois": "Cupim",
+      "registro_id": "2025-11-08_cupim",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "3.99",
+      "registro_id": "2025-11-08_musculo_traseiro",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "picanha",
+      "campo": "corte",
+      "depois": "Picanha",
+      "registro_id": "2025-11-18_picanha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  PESCOÇO  ",
+      "campo": "corte",
+      "depois": "Pescoço",
+      "registro_id": "2025-11-21_pescoco",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "0.82",
+      "registro_id": "2025-11-24_vazio",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "maminha",
+      "campo": "corte",
+      "depois": "Maminha",
+      "registro_id": "2025-12-01_maminha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  PESCOÇO  ",
+      "campo": "corte",
+      "depois": "Pescoço",
+      "registro_id": "2025-12-02_pescoco",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "38,39",
+      "campo": "preco_venda_kg",
+      "depois": "38.39",
+      "registro_id": "2025-12-17_acem",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "36,41",
+      "campo": "preco_venda_kg",
+      "depois": "36.41",
+      "registro_id": "2025-12-23_acem",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "0.00",
+      "registro_id": "2026-01-01_lagarto",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "24,94",
+      "campo": "preco_venda_kg",
+      "depois": "24.94",
+      "registro_id": "2026-01-05_costelao",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "35,98",
+      "campo": "preco_venda_kg",
+      "depois": "35.98",
+      "registro_id": "2026-01-07_musculo_dianteiro",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "40,53",
+      "campo": "preco_venda_kg",
+      "depois": "40.53",
+      "registro_id": "2026-01-09_file_agulha",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "filé mignon",
+      "campo": "corte",
+      "depois": "Filé Mignon",
+      "registro_id": "2026-01-09_file_mignon",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  VAZIO  ",
+      "campo": "corte",
+      "depois": "Vazio",
+      "registro_id": "2026-01-10_vazio",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "5.02",
+      "registro_id": "2026-01-13_lagarto",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "2.52",
+      "registro_id": "2026-01-31_ponta_de_peito",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "48,75",
+      "campo": "preco_venda_kg",
+      "depois": "48.75",
+      "registro_id": "2026-02-03_fraldinha",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "filé de agulha",
+      "campo": "corte",
+      "depois": "Filé de Agulha",
+      "registro_id": "2026-02-06_file_agulha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "0.21",
+      "registro_id": "2026-02-09_maminha",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "1.47",
+      "registro_id": "2026-02-16_file_mignon",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  LAGARTO  ",
+      "campo": "corte",
+      "depois": "Lagarto",
+      "registro_id": "2026-02-17_lagarto",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "56,15",
+      "campo": "preco_venda_kg",
+      "depois": "56.15",
+      "registro_id": "2026-02-17_maminha",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "  MAMINHA  ",
+      "campo": "corte",
+      "depois": "Maminha",
+      "registro_id": "2026-03-01_maminha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  FILÉ DE AGULHA  ",
+      "campo": "corte",
+      "depois": "Filé de Agulha",
+      "registro_id": "2026-03-02_file_agulha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "0.73",
+      "registro_id": "2026-03-09_musculo_dianteiro",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  FILÉ DE AGULHA  ",
+      "campo": "corte",
+      "depois": "Filé de Agulha",
+      "registro_id": "2026-04-03_file_agulha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "2.07",
+      "registro_id": "2026-04-03_file_agulha",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "3.01",
+      "registro_id": "2026-04-10_pescoco",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "paleta",
+      "campo": "corte",
+      "depois": "Paleta",
+      "registro_id": "2026-04-16_paleta",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "53,12",
+      "campo": "preco_venda_kg",
+      "depois": "53.12",
+      "registro_id": "2026-04-21_alcatra",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "  COXÃO DURO  ",
+      "campo": "corte",
+      "depois": "Coxão Duro",
+      "registro_id": "2026-04-23_coxao_duro",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "3.65",
+      "registro_id": "2026-05-01_file_simples",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "vazio",
+      "campo": "corte",
+      "depois": "Vazio",
+      "registro_id": "2026-05-03_vazio",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  PATINHO  ",
+      "campo": "corte",
+      "depois": "Patinho",
+      "registro_id": "2026-05-17_patinho",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "46,33",
+      "campo": "preco_venda_kg",
+      "depois": "46.33",
+      "registro_id": "2026-05-21_vazio",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "36,31",
+      "campo": "preco_venda_kg",
+      "depois": "36.31",
+      "registro_id": "2026-05-25_acem",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "3.80",
+      "registro_id": "2026-05-26_paleta",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  FRALDINHA  ",
+      "campo": "corte",
+      "depois": "Fraldinha",
+      "registro_id": "2026-05-27_fraldinha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  COXÃO DURO  ",
+      "campo": "corte",
+      "depois": "Coxão Duro",
+      "registro_id": "2026-05-28_coxao_duro",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  MÚSCULO TRASEIRO  ",
+      "campo": "corte",
+      "depois": "Músculo Traseiro",
+      "registro_id": "2026-05-28_musculo_traseiro",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "3.59",
+      "registro_id": "2026-05-30_maminha",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "49,82",
+      "campo": "preco_venda_kg",
+      "depois": "49.82",
+      "registro_id": "2026-06-04_coxao_mole",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "músculo dianteiro",
+      "campo": "corte",
+      "depois": "Músculo Dianteiro",
+      "registro_id": "2026-06-09_musculo_dianteiro",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "0.55",
+      "registro_id": "2026-06-09_pescoco",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "3.65",
+      "registro_id": "2026-06-10_maminha",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  LAGARTO  ",
+      "campo": "corte",
+      "depois": "Lagarto",
+      "registro_id": "2026-06-13_lagarto",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "41,89",
+      "campo": "preco_venda_kg",
+      "depois": "41.89",
+      "registro_id": "2026-06-15_capa_file",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "lagarto",
+      "campo": "corte",
+      "depois": "Lagarto",
+      "registro_id": "2026-06-16_lagarto",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "104,60",
+      "campo": "preco_venda_kg",
+      "depois": "104.60",
+      "registro_id": "2026-06-18_file_mignon",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "alcatra",
+      "campo": "corte",
+      "depois": "Alcatra",
+      "registro_id": "2026-06-19_alcatra",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  FILÉ DE AGULHA  ",
+      "campo": "corte",
+      "depois": "Filé de Agulha",
+      "registro_id": "2026-06-19_file_agulha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  VAZIO  ",
+      "campo": "corte",
+      "depois": "Vazio",
+      "registro_id": "2026-06-23_vazio",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "4.84",
+      "registro_id": "2026-07-02_musculo_traseiro",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  FILÉ MIGNON  ",
+      "campo": "corte",
+      "depois": "Filé Mignon",
+      "registro_id": "2026-07-18_file_mignon",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  CAPA DE FILÉ  ",
+      "campo": "corte",
+      "depois": "Capa de Filé",
+      "registro_id": "2026-07-29_capa_file",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "  FRALDINHA  ",
+      "campo": "corte",
+      "depois": "Fraldinha",
+      "registro_id": "2026-07-30_fraldinha",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "6.82",
+      "registro_id": "2026-07-31_musculo_traseiro",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  LAGARTO  ",
+      "campo": "corte",
+      "depois": "Lagarto",
+      "registro_id": "2026-08-02_lagarto",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "filé simples",
+      "campo": "corte",
+      "depois": "Filé Simples",
+      "registro_id": "2026-08-03_file_simples",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "35,27",
+      "campo": "preco_venda_kg",
+      "depois": "35.27",
+      "registro_id": "2026-08-08_pescoco",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "4.06",
+      "registro_id": "2026-08-09_pescoco",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  CUPIM  ",
+      "campo": "corte",
+      "depois": "Cupim",
+      "registro_id": "2026-08-13_cupim",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "42,31",
+      "campo": "preco_venda_kg",
+      "depois": "42.31",
+      "registro_id": "2026-08-16_coxao_duro",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "",
+      "campo": "estoque_inicial_kg",
+      "depois": "1.50",
+      "registro_id": "2026-08-25_lagarto",
+      "regra": "estoques_reconstruidos"
+    },
+    {
+      "antes": "  PALETA  ",
+      "campo": "corte",
+      "depois": "Paleta",
+      "registro_id": "2026-08-26_paleta",
+      "regra": "nomes_padronizados"
+    },
+    {
+      "antes": "45,98",
+      "campo": "preco_venda_kg",
+      "depois": "45.98",
+      "registro_id": "2026-08-27_coxao_duro",
+      "regra": "precos_convertidos"
+    },
+    {
+      "antes": "  COXÃO MOLE  ",
+      "campo": "corte",
+      "depois": "Coxão Mole",
+      "registro_id": "2026-08-30_coxao_mole",
+      "regra": "nomes_padronizados"
+    }
+  ],
+  "duplicatas_removidas": 15,
+  "linhas_entrada": 7680,
+  "linhas_saida": 7665,
+  "nulos_entrada": {
+    "ano": 0,
+    "categoria_anatomica": 0,
+    "corte": 0,
+    "custo_estimado_kg": 0,
+    "custo_total_estimado_rs": 0,
+    "data": 0,
+    "desconto_pct": 0,
+    "dia_semana": 0,
+    "entrada_kg": 0,
+    "estoque_disponivel_kg": 0,
+    "estoque_final_kg": 0,
+    "estoque_inicial_kg": 23,
+    "evento_calendario": 7428,
+    "fim_de_semana": 0,
+    "margem_bruta_estimada_rs": 0,
+    "mes": 0,
+    "perda_kg": 0,
+    "perfil_uso": 0,
+    "preco_venda_kg": 0,
+    "produto_id": 0,
+    "promocao": 0,
+    "quantidade_vendida_kg": 0,
+    "receita_bruta_rs": 0,
+    "registro_id": 0,
+    "ruptura_estoque": 0,
+    "semana_ano": 0
+  },
+  "nulos_saida": {
+    "ano": 0,
+    "ano_semana_iso": 0,
+    "categoria_anatomica": 0,
+    "corte": 0,
+    "custo_estimado_kg": 0,
+    "custo_total_estimado_rs": 0,
+    "data": 0,
+    "desconto_pct": 0,
+    "dia_semana": 0,
+    "entrada_kg": 0,
+    "estoque_disponivel_kg": 0,
+    "estoque_final_kg": 0,
+    "estoque_inicial_kg": 0,
+    "estoque_inicial_reconstruido": 0,
+    "evento_calendario": 7413,
+    "fim_de_semana": 0,
+    "margem_bruta_estimada_rs": 0,
+    "mes": 0,
+    "perda_kg": 0,
+    "perfil_uso": 0,
+    "preco_venda_kg": 0,
+    "produto_id": 0,
+    "promocao": 0,
+    "quantidade_vendida_kg": 0,
+    "receita_bruta_rs": 0,
+    "registro_id": 0,
+    "ruptura_estoque": 0,
+    "semana_ano": 0
+  },
+  "registros_rejeitados": 0,
+  "sha256_entrada": "96fff3c7dfbba9c0b92a42f2853bb86a1212af56c0513e940175cf53519a3694",
+  "sha256_saida": "aa45c62be75407bcc69c143fa23e720ad20431e5c4210ab372bc77234ed2bb77",
+  "transformacoes": {
+    "calendario_corrigido": 0,
+    "estoques_reconstruidos": 23,
+    "nomes_padronizados": 38,
+    "precos_convertidos": 19
+  },
+  "versao_dataset": "1.0.0",
+  "versao_pipeline": "1.0.0"
+}
