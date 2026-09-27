@@ -1,0 +1,14 @@
+* text=auto eol=lf
+
+# Preservar bytes dos oficiais; CRLF original é final de linha válido.
+/generate_iacarne_dataset.py -text whitespace=cr-at-eol
+/iacarne_dataset_especificacao.json -text whitespace=cr-at-eol
+/iacarne_dataset_v1.xlsx -text
+/iacarne_ground_truth_auditoria.csv -text whitespace=cr-at-eol
+/iacarne_vendas_bruto.csv -text whitespace=cr-at-eol
+/README_dataset_iacarne.md -text whitespace=cr-at-eol
+/data/raw/iacarne_vendas_bruto.csv -text whitespace=cr-at-eol
+
+# Saídas determinísticas do pipeline usam LF em qualquer checkout.
+/data/processed/*.csv text eol=lf
+/data/processed/*.json text eol=lf

@@ -1,0 +1,34 @@
+{
+  "projeto": "iaCarne",
+  "versao_dataset": "1.0.0",
+  "natureza": "sintetico_calibrado_por_referencias_reais",
+  "periodo": {
+    "inicio": "2025-09-01",
+    "fim": "2026-08-31"
+  },
+  "granularidade": "1 linha por dia por corte bovino",
+  "linhas_base": 7665,
+  "linhas_brutas_com_duplicatas": 7680,
+  "quantidade_cortes": 21,
+  "seed": 26092026,
+  "target_futuro_ml": "quantidade_vendida_kg",
+  "aviso_modelagem": "Venda observada pode ser censurada por ruptura. demanda_latente_kg existe somente no arquivo de auditoria e não deve ser usada como feature.",
+  "fontes": [
+    {
+      "fonte": "Procon Joinville — Pesquisa de Preços Churrasco, maio/2026",
+      "url": "https://www.joinville.sc.gov.br/wp-content/uploads/2026/05/Pesquisa-de-Precos-Churrasco-mai-2026.pdf"
+    },
+    {
+      "fonte": "Epagri/Cepa — Preços Agrícolas",
+      "url": "https://cepa.epagri.sc.gov.br/index.php/mercado-agricola/"
+    },
+    {
+      "fonte": "IBGE — Pesquisa Trimestral do Abate de Animais, 1º tri/2026",
+      "url": "https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/47166-brasil-registra-alta-no-abate-de-bovinos-frangos-e-suinos-no-1-trimestre-em-comparacao-com-2025"
+    },
+    {
+      "fonte": "UNEP — Relatório do Índice de Desperdício de Alimentos 2024",
+      "url": "https://www.unep.org/pt-br/resources/publicacoes/relatorio-do-indice-de-desperdicio-de-alimentos-2024"
+    }
+  ]
+}

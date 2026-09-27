@@ -1,0 +1,8 @@
+{
+  "generate_iacarne_dataset.py": "7db4d7717d8db9d3eb0e4fafd0d90f2412e3427a6b564165573bf98e62923f22",
+  "iacarne_dataset_especificacao.json": "e47f646768cbbe78292273302e0c0762851973244aedf57e38e054fabb9dcfa1",
+  "iacarne_dataset_v1.xlsx": "56f7e9bc5108e81f57b5936c0e40b7557fce2a532bd4c835c7777fbfcfff727b",
+  "iacarne_ground_truth_auditoria.csv": "5d336077f18f95c730be0ab870efc2c956d2c82ae7086a46aaec7455a1aed1c2",
+  "iacarne_vendas_bruto.csv": "96fff3c7dfbba9c0b92a42f2853bb86a1212af56c0513e940175cf53519a3694",
+  "README_dataset_iacarne.md": "097e986499ec3ce61d519b5ace75aa94a88a4a4efacd1bcf13d3e20c7b9dd7cf"
+}

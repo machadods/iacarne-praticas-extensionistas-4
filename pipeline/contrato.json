@@ -1,0 +1,138 @@
+{
+  "versao_dataset": "1.0.0",
+  "colunas": [
+    "registro_id",
+    "data",
+    "produto_id",
+    "corte",
+    "categoria_anatomica",
+    "perfil_uso",
+    "preco_venda_kg",
+    "promocao",
+    "desconto_pct",
+    "estoque_inicial_kg",
+    "entrada_kg",
+    "estoque_disponivel_kg",
+    "quantidade_vendida_kg",
+    "perda_kg",
+    "estoque_final_kg",
+    "ruptura_estoque",
+    "receita_bruta_rs",
+    "custo_estimado_kg",
+    "custo_total_estimado_rs",
+    "margem_bruta_estimada_rs",
+    "dia_semana",
+    "fim_de_semana",
+    "evento_calendario",
+    "mes",
+    "ano",
+    "semana_ano"
+  ],
+  "produtos": {
+    "pescoco": {
+      "corte": "Pescoço",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "cozimento"
+    },
+    "acem": {
+      "corte": "Acém",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "ponta_de_peito": {
+      "corte": "Ponta de Peito",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "cozimento"
+    },
+    "paleta": {
+      "corte": "Paleta",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "musculo_dianteiro": {
+      "corte": "Músculo Dianteiro",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "cozimento"
+    },
+    "cupim": {
+      "corte": "Cupim",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "churrasco"
+    },
+    "capa_file": {
+      "corte": "Capa de Filé",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "churrasco"
+    },
+    "file_agulha": {
+      "corte": "Filé de Agulha",
+      "categoria_anatomica": "dianteiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "file_simples": {
+      "corte": "Filé Simples",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "picanha": {
+      "corte": "Picanha",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "churrasco"
+    },
+    "file_mignon": {
+      "corte": "Filé Mignon",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "premium"
+    },
+    "alcatra": {
+      "corte": "Alcatra",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "churrasco"
+    },
+    "fraldinha": {
+      "corte": "Fraldinha",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "churrasco"
+    },
+    "coxao_mole": {
+      "corte": "Coxão Mole",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "lagarto": {
+      "corte": "Lagarto",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "costelao": {
+      "corte": "Costelão",
+      "categoria_anatomica": "costela",
+      "perfil_uso": "churrasco"
+    },
+    "maminha": {
+      "corte": "Maminha",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "churrasco"
+    },
+    "coxao_duro": {
+      "corte": "Coxão Duro",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "vazio": {
+      "corte": "Vazio",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "churrasco"
+    },
+    "patinho": {
+      "corte": "Patinho",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "dia_a_dia"
+    },
+    "musculo_traseiro": {
+      "corte": "Músculo Traseiro",
+      "categoria_anatomica": "traseiro",
+      "perfil_uso": "cozimento"
+    }
+  }
+}
