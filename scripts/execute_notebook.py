@@ -1,5 +1,6 @@
 """Executa a EDA integral usando o mesmo Python que iniciou este comando."""
 
+import argparse
 import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -11,7 +12,11 @@ from jupyter_client.kernelspec import KernelSpecManager
 
 def main():
     root = Path(__file__).resolve().parents[1]
-    path = root / "notebooks/01_eda_inicial.ipynb"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("notebook", nargs="?", default="notebooks/01_eda_inicial.ipynb",
+                        help="Caminho do notebook, relativo à raiz do projeto")
+    args = parser.parse_args()
+    path = (root / args.notebook).resolve()
     notebook = nbformat.read(path, as_version=4)
     nbformat.validate(notebook)
     # Kernel temporário garante uso do venv sem alterar kernels do usuário.
