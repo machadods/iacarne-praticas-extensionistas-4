@@ -16,7 +16,7 @@ As lacunas controladas de estoque inicial podem ser reconstruídas pela identida
 A base permite verificar o funcionamento do pipeline; não prova comportamento comercial real nem eficácia preditiva. Dados reais futuros dependem de autorização, anonimização, contrato de campos e nova auditoria. Mudanças na origem ou nas regras exigirão avaliação de compatibilidade e versionamento explícito, sem sobrescrever a versão oficial.
 
 ## Temporal
-A Fase 1 abrange pré-projeto, viabilidade, requisitos, casos de uso, diagramas, dados, ETL e EDA. O cronograma é orientado por dependências e critérios verificáveis, sem inventar data de entrega institucional. O intervalo mínimo real de 30 minutos entre commits é uma restrição do roteiro e pode exigir espera após validação da unidade de trabalho.
+A Fase 1 abrange pré-projeto, viabilidade, requisitos, casos de uso, diagramas, dados, ETL e EDA. O cronograma é orientado por dependências e critérios verificáveis, sem inventar data de entrega institucional. Os commits devem representar unidades coerentes e verificáveis de trabalho.
 
 Engenharia de atributos para previsão, baseline, modelos, avaliação temporal e integração de interface pertencem à fase posterior. O protótipo de baixa fidelidade é opcional e não deve comprometer os itens obrigatórios.
 

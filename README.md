@@ -1,10 +1,10 @@
-# iaCarne — Entrega Parcial 1
+# iaCarne — Ciência de Dados para análise e previsão de vendas
 
 **Sistema Inteligente para Análise e Previsão de Demanda de Produtos Cárneos**
 
 “O melhor corte da cidade, onde você estiver.”
 
-Projeto de **Práticas Extensionistas IV**: documentação acadêmica, pipeline Python, base tratada e EDA para preparar futura previsão de demanda. Os dados são **sintéticos**, não representam vendas reais e não contêm dados pessoais reais. Esta fase não treina modelos nem implementa integração comercial.
+Projeto de **Práticas Extensionistas IV** em evolução. A Fase 1 foi concluída com documentação acadêmica, ETL e EDA inicial. A Sprint 4 da Fase 2 foi concluída com atributos temporais, matriz de modelagem e EDA avançada. O problema atual é prever a **venda observada** de cada corte um dia à frente; isso não estima a demanda verdadeira não atendida por falta de estoque. Os dados são **sintéticos**, não representam vendas reais e não contêm dados pessoais reais. Ainda não há modelo treinado, baseline ou dashboard.
 
 ## Documentação acadêmica
 
@@ -15,23 +15,33 @@ Projeto de **Práticas Extensionistas IV**: documentação acadêmica, pipeline 
 - Diagramas: [blocos](docs/diagramas/blocos.md), [entidades](docs/diagramas/entidades.md), [fluxo textual](docs/diagramas/processo.md) e [BPMN visual](docs/diagramas/processo_bpmn.png). BPMN em versão inicial — validação com usuário/parceiro pendente.
 - [Auditoria inicial](docs/auditoria_inicial.md) e [regras de dados](data/README.md)
 - [Resultados das validações e limitações](docs/validacao_entrega.md)
+- [Sprint 4: resultados, atributos e critérios de conclusão](docs/sprint4_eda_features.md)
+- [Plano para futura amostra real](docs/plano_dados_reais.md), dependente de autorização
 
 ## Arquitetura e estrutura
 
 ```text
-CSV bruto → extract → validate/transform → load → CSV tratado → EDA
+CSV bruto → extract → validate/transform → load → CSV tratado → EDA inicial
+                                                   ↓
+                                         atributos temporais
+                                                   ↓
+                                      matriz de modelagem → EDA avançada
 ```
 
 ```text
 data/raw/             cópia integral da entrada oficial
 data/processed/       CSV tratado e relatório JSON do pipeline
+data/modeling/        base pronta para experimentos e metadados da preparação
 docs/                 documentos acadêmicos, auditoria, Mermaid e BPMN visual
 pipeline/             extração, contrato, transformação e exportação
-notebooks/            01_eda_inicial.ipynb
+modeling/features.py  criação de atributos temporais
+modeling/dataset.py   preparação reproduzível da matriz
+notebooks/            01_eda_inicial.ipynb e 02_eda_avancada_features.ipynb
 reports/              tabelas, resumo e gráficos da EDA
+reports/sprint4/      insights e figuras da EDA avançada
 scripts/              execução reproduzível do notebook
 tests/                testes de qualidade, erros e reprodutibilidade
-requirements.txt      dependências diretas da EDA, fixadas
+requirements.txt      dependências diretas de dados e notebooks, fixadas
 ```
 
 Os seis arquivos fornecidos permanecem na raiz. A aplicação iaCarne está em **outro repositório**, com frontend Next.js 15/TypeScript e monorepositório `apps/web`, `apps/api`, `packages`. Esta entrega não altera a aplicação e não depende de Node, serviços de backend ou suas credenciais. Não há dashboard integrado: os indicadores são consultados no notebook e nos relatórios.
@@ -69,14 +79,16 @@ As fontes e seus links são os declarados na [especificação oficial](iacarne_d
 
 ## Instalação e execução
 
-Ambiente de referência: Windows e Python **3.10.11**. O ETL e os testes usam somente a biblioteca padrão; as dependências abaixo são necessárias ao notebook. Execute na raiz deste repositório.
+Ambiente de referência: Windows e Python **3.10.11**. O ETL e seus testes históricos usam a biblioteca padrão. A engenharia de atributos, seus testes e os notebooks utilizam as dependências de `requirements.txt`, incluindo pandas e NumPy **2.2.6**, versão já instalada e validada. Execute na raiz deste repositório.
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m pipeline.run_pipeline
+.\.venv\Scripts\python.exe -m modeling.dataset
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 .\.venv\Scripts\python.exe scripts/execute_notebook.py
+.\.venv\Scripts\python.exe scripts/execute_notebook.py notebooks/02_eda_avancada_features.ipynb
 ```
 
 Alternativamente, ative o ambiente no PowerShell com `.\.venv\Scripts\Activate.ps1` e use `python` nos comandos. Os caminhos explícitos acima dispensam alteração da política de execução do PowerShell.
@@ -84,6 +96,16 @@ Alternativamente, ative o ambiente no PowerShell com `.\.venv\Scripts\Activate.p
 Em Linux/macOS, o equivalente é `python3 -m venv .venv`, `source .venv/bin/activate`, `python -m pip install -r requirements.txt` e os mesmos comandos Python. Essa alternativa deve ser validada no respectivo sistema; o ambiente testado nesta entrega é Windows.
 
 O notebook pode ser aberto em editor compatível com `.ipynb`, selecionando o Python da `.venv`. A execução automatizada não exige instalar ou configurar um servidor Jupyter: o script cria um kernel temporário com o mesmo interpretador e salva o notebook após execução integral. Se ocorrer erro, a exceção é apresentada e o notebook anterior não é substituído por uma execução incompleta.
+
+Com o ambiente ativado, a sequência equivalente é:
+
+```powershell
+python -m pipeline.run_pipeline
+python -m modeling.dataset
+python -m unittest discover -s tests -v
+python scripts/execute_notebook.py
+python scripts/execute_notebook.py notebooks/02_eda_avancada_features.ipynb
+```
 
 ## Pipeline e saídas
 
@@ -104,6 +126,8 @@ O [notebook](notebooks/01_eda_inicial.ipynb) apresenta qualidade, dimensões, ti
 
 Médias e fechamentos representam estoque no período; somas temporais de saldo não são interpretadas como estoque físico. Comparações promocionais são descritivas, sem inferência causal.
 
+O [notebook 02](notebooks/02_eda_avancada_features.ipynb) aprofunda a análise da venda observada, do calendário e dos atributos históricos. Usa a matriz de modelagem para as features e a base tratada para o contexto de ruptura, promoção e preço. Seus nove gráficos e a [síntese de insights](reports/sprint4/insights.md) ficam em `reports/sprint4/`. Nenhuma dessas comparações comprova causalidade ou desempenho preditivo.
+
 ## Resultados principais da Fase 1
 
 | Evidência | Resultado |
@@ -117,10 +141,27 @@ Médias e fechamentos representam estoque no período; somas temporais de saldo 
 
 Esses valores descrevem a base sintética; não medem desempenho de um estabelecimento real. As evidências e limitações estão no [relatório de validação](docs/validacao_entrega.md).
 
+## Resultados da Sprint 4
+
+| Evidência | Resultado |
+|---|---|
+| Matriz de modelagem | 7.077 registros, 21 cortes e 337 observações por produto |
+| Período | 29/09/2025 a 31/08/2026, após remover 588 linhas de aquecimento |
+| Atributos | 15 features; histórico máximo de 28 dias; data e alvo separados |
+| Qualidade e reprodução | Zero nulos, zero duplicatas produto/data e CSV/JSON determinísticos |
+| EDA avançada | 16 células de código executadas e 9 gráficos |
+| Testes | 28 aprovados na validação de fechamento da Sprint 4 |
+
+As saídas são `data/modeling/iacarne_modelagem.csv` e `data/modeling/relatorio_modelagem.json`. A preparação lê somente o CSV tratado, preserva essa fonte e usa `modeling.features.build_features()`. Lags e médias são calculados por produto com histórico até D-1; as médias aplicam `shift(1)` antes da janela completa. Não houve codificação, normalização, divisão treino/teste ou treinamento. Os detalhes estão na [documentação da Sprint 4](docs/sprint4_eda_features.md).
+
 ## Limitações e roadmap
 
 Dataset sintético, um ano de observações e padrões impostos pelo gerador. Dados reais ainda não foram utilizados e seu uso futuro depende de autorização e anonimização. UAT real ainda não ocorreu; a validação com parceiro está pendente e não há parceria formal comprovada. O modelo de ML ainda não foi desenvolvido. Redução de desperdício e benefício ambiental são impactos potenciais, não resultados comprovados. Vendas podem ser menores que demanda por ruptura. Custos são estimados.
 
 Para previsão antes da operação, não usar o resultado do mesmo dia: perdas, estoque final, ruptura, receita, custo total e margem; demanda latente nunca é feature. Preço, promoção, desconto e reposição dependerão de disponibilidade no instante da previsão. Uma fase futura deve definir horizonte, baseline e validação temporal, avaliando MAE/RMSE e, se adequado, MAPE.
 
-Próximas etapas: avaliação acadêmica e com usuários; autorização e anonimização de dados reais; revisão do contrato; engenharia de atributos e baseline; somente depois, modelos e eventual interface integrada. O protótipo opcional não integra esta entrega.
+Concluído: Fase 1, ETL, EDA inicial, engenharia de atributos, dataset de modelagem e EDA avançada da Sprint 4.
+
+Próxima etapa — Sprint 5: protocolo e validação temporal, baseline, divisão treino/validação/teste, codificação das categorias, treinamento e comparação de modelos, ajuste moderado de hiperparâmetros e modelo serializado.
+
+Futuro — Sprints 6 a 8: interface e integração, beta, UAT e socialização, feedback, manual, relatório e apresentação final. A amostra real depende de autorização e nova auditoria. Ver o [cronograma](docs/cronograma.md); não há datas ou resultados futuros prometidos.
