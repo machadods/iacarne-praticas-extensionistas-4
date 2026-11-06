@@ -1,0 +1,296 @@
+{
+  "versao_artefato": "1.0.0",
+  "artefato": "artifacts/models/iacarne_ridge_v1.joblib",
+  "hash_sha256_artefato": "67b32644862f2b3fcfb3b83b30e3f1498cbd7f7b46e3356ac9dacff86d7bc73f",
+  "algoritmo": "Ridge",
+  "hiperparametros": {
+    "alpha": 100.0,
+    "copy_X": true,
+    "fit_intercept": true,
+    "max_iter": null,
+    "positive": false,
+    "random_state": null,
+    "solver": "cholesky",
+    "tol": 0.0001
+  },
+  "data_corte_treino": "2026-06-30",
+  "contagens": {
+    "treino": 4494,
+    "validacao": 1281,
+    "teste": 1302,
+    "treino_validacao": 5775
+  },
+  "periodos": {
+    "treino": {
+      "inicio": "2025-09-29",
+      "fim": "2026-04-30"
+    },
+    "validacao": {
+      "inicio": "2026-05-01",
+      "fim": "2026-06-30"
+    },
+    "teste": {
+      "inicio": "2026-07-01",
+      "fim": "2026-08-31"
+    }
+  },
+  "alvo": "quantidade_vendida_kg",
+  "features": [
+    "produto_id",
+    "corte",
+    "categoria_anatomica",
+    "perfil_uso",
+    "dia_semana",
+    "fim_de_semana",
+    "mes",
+    "semana_ano",
+    "venda_lag_1",
+    "venda_lag_7",
+    "venda_lag_14",
+    "venda_lag_28",
+    "venda_media_7",
+    "venda_media_14",
+    "venda_media_28"
+  ],
+  "features_categoricas": [
+    "produto_id",
+    "corte",
+    "categoria_anatomica",
+    "perfil_uso",
+    "dia_semana"
+  ],
+  "features_numericas": [
+    "fim_de_semana",
+    "mes",
+    "semana_ano",
+    "venda_lag_1",
+    "venda_lag_7",
+    "venda_lag_14",
+    "venda_lag_28",
+    "venda_media_7",
+    "venda_media_14",
+    "venda_media_28"
+  ],
+  "fonte": "data/modeling/iacarne_modelagem.csv",
+  "hash_sha256_modelagem": "1a6b482dcca3497ed605a821ae13cdd46404186c5d9b94716f8cb2e8f0131772",
+  "versoes": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.15.3",
+    "joblib": "1.6.0"
+  },
+  "protocolo": {
+    "id": "previsao_diaria_d_menos_1",
+    "horizonte_dias": 1,
+    "historico": "Vendas observadas até D−1, incluindo dias de teste já encerrados.",
+    "entrada": "Atributos tabulares prontos. Lags e médias móveis são preparados fora do pipeline."
+  },
+  "avaliacao": "teste",
+  "metricas_finais": {
+    "baseline": {
+      "n_observacoes": 1302,
+      "mae_kg": 1.860814132104455,
+      "rmse_kg": 2.5104379334115237,
+      "r2": 0.847854797231502,
+      "variacao_mae_pct": 0.0
+    },
+    "ridge": {
+      "n_observacoes": 1302,
+      "mae_kg": 1.4755172821785392,
+      "rmse_kg": 1.9930450632874257,
+      "r2": 0.9041055389208563,
+      "variacao_mae_pct": -20.70582135412799
+    }
+  },
+  "previsoes_invalidas": {
+    "baseline": {
+      "invalidas": 0,
+      "nao_finitas": 0,
+      "negativas": 0
+    },
+    "ridge": {
+      "invalidas": 0,
+      "nao_finitas": 0,
+      "negativas": 0
+    }
+  },
+  "mae_por_corte": [
+    {
+      "corte": "Acém",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 4.023064516129032,
+        "ridge": 3.0768709177392592
+      }
+    },
+    {
+      "corte": "Alcatra",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.9801612903225807,
+        "ridge": 1.7097157310994293
+      }
+    },
+    {
+      "corte": "Capa de Filé",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.4580645161290322,
+        "ridge": 1.042368109108976
+      }
+    },
+    {
+      "corte": "Costelão",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 2.2598387096774197,
+        "ridge": 1.8653316299014073
+      }
+    },
+    {
+      "corte": "Coxão Duro",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 2.0530645161290324,
+        "ridge": 1.546432209424445
+      }
+    },
+    {
+      "corte": "Coxão Mole",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 2.6269354838709678,
+        "ridge": 2.258638480770534
+      }
+    },
+    {
+      "corte": "Cupim",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.233709677419355,
+        "ridge": 0.9411015001888475
+      }
+    },
+    {
+      "corte": "Filé Mignon",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 0.9677419354838711,
+        "ridge": 0.9214019518167699
+      }
+    },
+    {
+      "corte": "Filé Simples",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.9840322580645162,
+        "ridge": 1.4746062804842421
+      }
+    },
+    {
+      "corte": "Filé de Agulha",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.6164516129032258,
+        "ridge": 1.4483620389357708
+      }
+    },
+    {
+      "corte": "Fraldinha",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.8025806451612905,
+        "ridge": 1.3036007668999292
+      }
+    },
+    {
+      "corte": "Lagarto",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.4006451612903228,
+        "ridge": 1.1154239179571106
+      }
+    },
+    {
+      "corte": "Maminha",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.7843548387096777,
+        "ridge": 1.4264498696454626
+      }
+    },
+    {
+      "corte": "Músculo Dianteiro",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.6296774193548393,
+        "ridge": 1.1990544416198137
+      }
+    },
+    {
+      "corte": "Músculo Traseiro",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.3537096774193547,
+        "ridge": 1.1355931886268797
+      }
+    },
+    {
+      "corte": "Paleta",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 2.5190322580645166,
+        "ridge": 1.8656145409714695
+      }
+    },
+    {
+      "corte": "Patinho",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 2.8432258064516134,
+        "ridge": 2.108334726631861
+      }
+    },
+    {
+      "corte": "Pescoço",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.2404838709677417,
+        "ridge": 1.0376374831085688
+      }
+    },
+    {
+      "corte": "Picanha",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.651290322580645,
+        "ridge": 1.3135723643368957
+      }
+    },
+    {
+      "corte": "Ponta de Peito",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.3783870967741934,
+        "ridge": 1.052136338292969
+      }
+    },
+    {
+      "corte": "Vazio",
+      "n_observacoes": 62,
+      "mae_kg": {
+        "baseline": 1.2706451612903225,
+        "ridge": 1.1436164381886769
+      }
+    }
+  ],
+  "verificacao_serializacao": {
+    "carregamento_ok": true,
+    "ordem_features_preservada": true,
+    "previsoes_comparadas": 1302,
+    "tolerancia_absoluta_kg": 1e-10,
+    "maior_diferenca_absoluta_kg": 0.0
+  }
+}
