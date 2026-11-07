@@ -15,16 +15,17 @@ Plano de trabalho baseado no cronograma institucional e nas dependências entre 
 | 8. EDA | Base tratada validada | Notebook executado, gráficos e interpretação |
 | 9. Reprodutibilidade | ETL e EDA | Instruções testadas e relatório de validação |
 
-O Dataset Gate foi resolvido pela inspeção dos arquivos oficiais fornecidos, sem gerar nova base. Os commits devem representar unidades coerentes e verificáveis de trabalho.
+Os arquivos originais foram inspecionados e preservados. O [registro da Entrega Parcial 1](validacao_entrega.md) reúne as verificações dessa fase.
 
-## Continuidade — Fase 2
+## Sprints de 2026
 
 | Sprint | Período | Trabalho | Situação |
 |---|---|---|---|
-| 4 | 28/09–18/10 | EDA avançada, engenharia de atributos, dataset de modelagem e insights | Concluída |
-| 5 | 19/10–08/11 | Baseline, algoritmos, treino, validação, tuning e comparação | Pendente |
-| 6 | 09/11–21/11 | Interface/dashboard, integração e beta | Pendente |
-| 7 | 22/11–29/11 | Validação com usuário/parceiro, feedback e correções | Pendente |
-| 8 | 30/11–06/12 | Relatório, manual, apresentação e entrega final | Pendente |
+| 4 | 28/09–18/10 | EDA avançada, atributos temporais e matriz de modelagem | Concluída. [Evidências da Sprint 4](sprint4_eda_features.md) |
+| 5 | 19/10–08/11 | Baseline, comparação, seleção, avaliação, modelo serializado e caderno | Concluída tecnicamente. Publicação dos complementos pendente. [Evidências e pendências](criterios_aceite.md) |
+| 6 | 09/11–21/11 | Interface, integração da inferência e versão beta | Planejada |
+| 7 | 22/11–29/11 | Validação com usuários, feedback e correções | Planejada |
+| 8 | 30/11–06/12 | Relatório final, manual, apresentação e entrega | Planejada |
+| Socialização | 08/12 | Apresentação do projeto | Planejada |
 
-O uso de dados reais depende de autorização, novo contrato e auditoria de qualidade. Essa pendência não foi resolvida pela base sintética. As próximas sprints são planejamento, sem resultados antecipados ou aprovação institucional declarada.
+O fechamento da Sprint 5 reúne a evidência do experimento sintético. A validação operacional com usuários é prevista para a Sprint 7. Uma futura amostra do açougue depende de autorização e de um contrato de dados próprio.

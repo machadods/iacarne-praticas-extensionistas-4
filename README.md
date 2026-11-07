@@ -1,167 +1,53 @@
-# iaCarne — Ciência de Dados para análise e previsão de vendas
+# iaCarne
 
-**Sistema Inteligente para Análise e Previsão de Demanda de Produtos Cárneos**
+Projeto acadêmico individual de **Ciência de Dados e Inteligência Artificial**, desenvolvido na disciplina **Práticas Extensionistas IV da UNOESC**. O objetivo é prever, um dia à frente, a **venda observada em kg** de cada um dos 21 cortes bovinos da base sintética.
 
-“O melhor corte da cidade, onde você estiver.”
+## Por onde começar
 
-Projeto de **Práticas Extensionistas IV** em evolução. A Fase 1 foi concluída com documentação acadêmica, ETL e EDA inicial. A Sprint 4 da Fase 2 foi concluída com atributos temporais, matriz de modelagem e EDA avançada. O problema atual é prever a **venda observada** de cada corte um dia à frente; isso não estima a demanda verdadeira não atendida por falta de estoque. Os dados são **sintéticos**, não representam vendas reais e não contêm dados pessoais reais. Ainda não há modelo treinado, baseline ou dashboard.
+- [Caderno de modelagem da Sprint 5](notebooks/03_modelagem_validacao.ipynb) reúne a metodologia, o código, as tabelas e os gráficos executados.
+- [Critérios de aceite e evidências](docs/criterios_aceite.md) distingue os critérios da Fase 1 dos resultados e das pendências da Sprint 5.
+- [Cronograma](docs/cronograma.md) situa as etapas concluídas e planejadas.
 
-## Documentação acadêmica
+## Resultados da Sprint 5
 
-- [Pré-projeto](docs/pre_projeto.md)
-- [Viabilidade](docs/viabilidade.md)
-- [Requisitos](docs/requisitos.md) e [critérios de aceite](docs/criterios_aceite.md)
-- [Casos de uso](docs/casos_de_uso.md) e [cronograma](docs/cronograma.md)
-- Diagramas: [blocos](docs/diagramas/blocos.md), [entidades](docs/diagramas/entidades.md), [fluxo textual](docs/diagramas/processo.md) e [BPMN visual](docs/diagramas/processo_bpmn.png). BPMN em versão inicial — validação com usuário/parceiro pendente.
-- [Auditoria inicial](docs/auditoria_inicial.md) e [regras de dados](data/README.md)
-- [Resultados das validações e limitações](docs/validacao_entrega.md)
-- [Sprint 4: resultados, atributos e critérios de conclusão](docs/sprint4_eda_features.md)
-- [Plano para futura amostra real](docs/plano_dados_reais.md), dependente de autorização
+A matriz tem **7.077 observações**, uma por corte e dia, com 15 atributos. Os lags e as médias móveis usam vendas observadas até **D−1**. O baseline sazonal copia a venda do mesmo corte em **D−7**. Ridge e Random Forest foram comparados em uma validação cronológica. A configuração escolhida foi Ridge com `alpha=100.0` e solver `cholesky`.
 
-## Arquitetura e estrutura
+| Avaliação | MAE D−7 (kg) | MAE Ridge (kg) | Diferença do Ridge |
+|---|---:|---:|---|
+| Teste final registrado, julho e agosto de 2026 | 1,860814 | 1,475517 | **20,7058% menor** |
+| Validação cruzada complementar, três folds expansivos | 1,976585 | 2,059202 | **4,18% maior** |
 
-```text
-CSV bruto → extract → validate/transform → load → CSV tratado → EDA inicial
-                                                   ↓
-                                         atributos temporais
-                                                   ↓
-                                      matriz de modelagem → EDA avançada
-```
+O Ridge teve MAE menor em dois dos três folds. A validação cruzada foi feita retrospectivamente, depois da seleção e da avaliação final, e não orientou a escolha original. Os dois resultados correspondem a períodos e ajustes diferentes.
 
-```text
-data/raw/             cópia integral da entrada oficial
-data/processed/       CSV tratado e relatório JSON do pipeline
-data/modeling/        base pronta para experimentos e metadados da preparação
-docs/                 documentos acadêmicos, auditoria, Mermaid e BPMN visual
-pipeline/             extração, contrato, transformação e exportação
-modeling/features.py  criação de atributos temporais
-modeling/dataset.py   preparação reproduzível da matriz
-notebooks/            01_eda_inicial.ipynb e 02_eda_avancada_features.ipynb
-reports/              tabelas, resumo e gráficos da EDA
-reports/sprint4/      insights e figuras da EDA avançada
-scripts/              execução reproduzível do notebook
-tests/                testes de qualidade, erros e reprodutibilidade
-requirements.txt      dependências diretas de dados e notebooks, fixadas
-```
+Os detalhes estão no [protocolo temporal](reports/sprint5/protocolo_validacao.md), na [comparação inicial](reports/sprint5/comparacao_inicial.md), na [seleção de hiperparâmetros](reports/sprint5/selecao_modelo.md), na [validação cruzada complementar](reports/sprint5/validacao_cruzada_temporal.md) e na [avaliação final](reports/sprint5/avaliacao_final.md).
 
-Os seis arquivos fornecidos permanecem na raiz. A aplicação iaCarne está em **outro repositório**, com frontend Next.js 15/TypeScript e monorepositório `apps/web`, `apps/api`, `packages`. Esta entrega não altera a aplicação e não depende de Node, serviços de backend ou suas credenciais. Não há dashboard integrado: os indicadores são consultados no notebook e nos relatórios.
+O [Ridge v1](artifacts/models/iacarne_ridge_v1.joblib) contém o pré-processamento tabular e o regressor. A entrada requer os 15 atributos prontos, inclusive os históricos. Os [metadados](artifacts/models/iacarne_ridge_v1.metadata.json) registram a ordem dos atributos, os hashes e as métricas finais.
 
-## Dataset oficial
+## Como executar o caderno
 
-Versão **1.0.0**, seed **26092026**, período **01/09/2025 a 31/08/2026**, 21 cortes bovinos. São 7.680 linhas brutas e 7.665 observações únicas, uma por dia/corte. A origem e as referências declaradas constam na [especificação oficial](iacarne_dataset_especificacao.json) e no [README fornecido](README_dataset_iacarne.md), incorporado por referência.
-
-- `iacarne_vendas_bruto.csv`: entrada oficial; sua cópia em raw alimenta o ETL.
-- `iacarne_ground_truth_auditoria.csv`: auditoria exclusivamente; não alimenta ETL, EDA operacional ou features.
-- `iacarne_dataset_especificacao.json`: metadados e origem.
-- `generate_iacarne_dataset.py`: gerador original preservado, não executado nesta entrega.
-- `iacarne_dataset_v1.xlsx`: material auxiliar/documental; não é fonte do pipeline.
-- `README_dataset_iacarne.md`: documentação original preservada.
-
-**Não executar o gerador para reproduzir esta entrega:** executar o ETL sobre os dados fornecidos. A execução direta do gerador original sobrescreve arquivos na sua pasta. A integridade dos originais é verificável pelo [manifesto SHA-256](docs/integridade_dataset.json) e pelos testes.
-
-## Origem das referências e premissas da simulação
-
-| Elemento | Natureza/origem |
-|---|---|
-| Preços de referência e contexto regional | Referências públicas do Procon Joinville / Epagri-Cepa, quando aplicáveis |
-| Contexto da cadeia bovina | IBGE |
-| Justificativa sobre sustentabilidade e desperdício | UNEP |
-| Fatores por dia da semana | Premissa sintética |
-| Fatores mensais | Premissa sintética |
-| Efeito de promoções | Premissa sintética |
-| Política de estoque | Premissa sintética |
-| Taxas de perdas | Premissa sintética |
-| Demanda-base por corte | Premissa sintética |
-
-As referências públicas servem como contexto e âncoras parciais de calibração. As regras de comportamento operacional, sazonalidade, estoque, promoções, perdas e demanda são premissas sintéticas da simulação e não devem ser atribuídas às fontes externas.
-
-As fontes e seus links são os declarados na [especificação oficial](iacarne_dataset_especificacao.json) e no [README original do dataset](README_dataset_iacarne.md). Não se afirma validação científica das premissas ou calibração integral a uma operação comercial real. Os registros não representam vendas reais do estabelecimento.
-
-## Instalação e execução
-
-Ambiente de referência: Windows e Python **3.10.11**. O ETL e seus testes históricos usam a biblioteca padrão. A engenharia de atributos, seus testes e os notebooks utilizam as dependências de `requirements.txt`, incluindo pandas e NumPy **2.2.6**, versão já instalada e validada. Execute na raiz deste repositório.
+Na raiz do repositório, em Windows com Python 3.10.11:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m pipeline.run_pipeline
-.\.venv\Scripts\python.exe -m modeling.dataset
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
-.\.venv\Scripts\python.exe scripts/execute_notebook.py
-.\.venv\Scripts\python.exe scripts/execute_notebook.py notebooks/02_eda_avancada_features.ipynb
+.\.venv\Scripts\python.exe -B scripts/execute_notebook.py notebooks/03_modelagem_validacao.ipynb
 ```
 
-Alternativamente, ative o ambiente no PowerShell com `.\.venv\Scripts\Activate.ps1` e use `python` nos comandos. Os caminhos explícitos acima dispensam alteração da política de execução do PowerShell.
+O notebook também pode ser aberto com os outputs salvos. Ao executá-lo, ele confere os hashes, reproduz o baseline da validação e os três folds no período de desenvolvimento. A comparação inicial, a seleção e o teste final são carregados dos registros existentes.
 
-Em Linux/macOS, o equivalente é `python3 -m venv .venv`, `source .venv/bin/activate`, `python -m pip install -r requirements.txt` e os mesmos comandos Python. Essa alternativa deve ser validada no respectivo sistema; o ambiente testado nesta entrega é Windows.
+## Dados e histórico do projeto
 
-O notebook pode ser aberto em editor compatível com `.ipynb`, selecionando o Python da `.venv`. A execução automatizada não exige instalar ou configurar um servidor Jupyter: o script cria um kernel temporário com o mesmo interpretador e salva o notebook após execução integral. Se ocorrer erro, a exceção é apresentada e o notebook anterior não é substituído por uma execução incompleta.
+O dataset sintético v1.0.0 cobre 01/09/2025 a 31/08/2026. A base tratada tem 7.665 observações. A matriz de modelagem começa em 29/09/2025, após o período inicial necessário para compor os históricos. A reprodução usa os arquivos fornecidos e os comandos da [documentação da Sprint 4](docs/sprint4_eda_features.md). O gerador original sobrescreve arquivos da base quando executado e fica reservado para referência. O arquivo de auditoria da demanda latente não faz parte das entradas do modelo. [Contrato e tratamento dos dados](data/README.md)
 
-Com o ambiente ativado, a sequência equivalente é:
+- **Fase 1:** [pré-projeto](docs/pre_projeto.md), [viabilidade](docs/viabilidade.md), [requisitos](docs/requisitos.md), [casos de uso](docs/casos_de_uso.md) e diagramas de [blocos](docs/diagramas/blocos.md), [entidades](docs/diagramas/entidades.md) e [processo](docs/diagramas/processo.md).
+- **Evidências anteriores:** [auditoria inicial](docs/auditoria_inicial.md), [registro da Entrega Parcial 1](docs/validacao_entrega.md), [EDA inicial](notebooks/01_eda_inicial.ipynb) e [EDA avançada](notebooks/02_eda_avancada_features.ipynb).
 
-```powershell
-python -m pipeline.run_pipeline
-python -m modeling.dataset
-python -m unittest discover -s tests -v
-python scripts/execute_notebook.py
-python scripts/execute_notebook.py notebooks/02_eda_avancada_features.ipynb
-```
+## Origem das referências e premissas da simulação
 
-## Pipeline e saídas
+Procon Joinville e Epagri-Cepa serviram de referência para preços e contexto regional, o IBGE para o contexto da cadeia bovina e o UNEP para a discussão sobre desperdício. Sazonalidade, promoções, estoque, perdas e demanda são regras da simulação. As fontes e premissas estão descritas na [especificação do dataset](iacarne_dataset_especificacao.json) e no [README original dos dados](README_dataset_iacarne.md).
 
-```powershell
-python -m pipeline.run_pipeline --help
-python -m pipeline.run_pipeline --output-dir data/processed_reproducao
-```
+## Limites e investigação complementar
 
-Saídas padrão: `data/processed/iacarne_vendas_tratado.csv` e `data/processed/relatorio_pipeline.json`. O segundo comando é opcional para comparar uma execução em diretório distinto; esse diretório não faz parte dos entregáveis.
+Os dados são sintéticos. Vendas observadas podem ser limitadas pelo estoque e não representam necessariamente a demanda total. A EDA incluiu o período posteriormente reservado ao teste. Os resultados medem erro de previsão nessa simulação. A generalização para uma operação comercial e a redução de perdas ou rupturas ainda não foram demonstradas. A validação operacional com usuários está pendente.
 
-O relatório contabiliza entrada, saída, nulos, duplicatas, rejeições e correções por chave. O pipeline converte preços com vírgula, padroniza nomes, reconstrói estoques iniciais ausentes pela identidade disponível − entrada e verifica saldos, valores monetários, calendário, continuidade e cobertura. Erros críticos interrompem a execução antes de publicar nova saída. Consulte [as regras e limitações de escrita](data/README.md).
-
-São acrescentados `estoque_inicial_reconstruido`, controle de qualidade, e `ano_semana_iso`, necessário para agrupar semanas sem confundir ano civil com ano ISO. Essas colunas não tornam a base uma matriz pronta de atributos preditivos.
-
-## EDA
-
-O [notebook](notebooks/01_eda_inicial.ipynb) apresenta qualidade, dimensões, tipos, estatísticas, volume por corte, evolução temporal, quantidades, preços, faturamento, estoque, perdas, promoções, calendário e correlações. Cada gráfico possui interpretação e é salvo em `reports/figures/`. Resumo e tabelas são exportados em `reports/`.
-
-Médias e fechamentos representam estoque no período; somas temporais de saldo não são interpretadas como estoque físico. Comparações promocionais são descritivas, sem inferência causal.
-
-O [notebook 02](notebooks/02_eda_avancada_features.ipynb) aprofunda a análise da venda observada, do calendário e dos atributos históricos. Usa a matriz de modelagem para as features e a base tratada para o contexto de ruptura, promoção e preço. Seus nove gráficos e a [síntese de insights](reports/sprint4/insights.md) ficam em `reports/sprint4/`. Nenhuma dessas comparações comprova causalidade ou desempenho preditivo.
-
-## Resultados principais da Fase 1
-
-| Evidência | Resultado |
-|---|---|
-| ETL | 7.680 linhas brutas → 7.665 tratadas; 21 cortes e 365 dias |
-| Tratamento | 15 duplicatas removidas, 19 preços normalizados, 23 estoques iniciais reconstruídos e 38 nomes padronizados |
-| Testes | 11 aprovados no checkpoint técnico `f726709`, incluindo determinismo, integridade dos originais e isolamento do ground truth |
-| EDA | Notebook com 19 células de código executadas, outputs salvos e 8 gráficos |
-| Volume e receita simulados | 114.254,29 kg e R$ 5.275.616,69 |
-| Perdas e ruptura simuladas | 371,71 kg de perdas; ruptura em 16,20% dos dias/corte |
-
-Esses valores descrevem a base sintética; não medem desempenho de um estabelecimento real. As evidências e limitações estão no [relatório de validação](docs/validacao_entrega.md).
-
-## Resultados da Sprint 4
-
-| Evidência | Resultado |
-|---|---|
-| Matriz de modelagem | 7.077 registros, 21 cortes e 337 observações por produto |
-| Período | 29/09/2025 a 31/08/2026, após remover 588 linhas de aquecimento |
-| Atributos | 15 features; histórico máximo de 28 dias; data e alvo separados |
-| Qualidade e reprodução | Zero nulos, zero duplicatas produto/data e CSV/JSON determinísticos |
-| EDA avançada | 16 células de código executadas e 9 gráficos |
-| Testes | 28 aprovados na validação de fechamento da Sprint 4 |
-
-As saídas são `data/modeling/iacarne_modelagem.csv` e `data/modeling/relatorio_modelagem.json`. A preparação lê somente o CSV tratado, preserva essa fonte e usa `modeling.features.build_features()`. Lags e médias são calculados por produto com histórico até D-1; as médias aplicam `shift(1)` antes da janela completa. Não houve codificação, normalização, divisão treino/teste ou treinamento. Os detalhes estão na [documentação da Sprint 4](docs/sprint4_eda_features.md).
-
-## Limitações e roadmap
-
-Dataset sintético, um ano de observações e padrões impostos pelo gerador. Dados reais ainda não foram utilizados e seu uso futuro depende de autorização e anonimização. UAT real ainda não ocorreu; a validação com parceiro está pendente e não há parceria formal comprovada. O modelo de ML ainda não foi desenvolvido. Redução de desperdício e benefício ambiental são impactos potenciais, não resultados comprovados. Vendas podem ser menores que demanda por ruptura. Custos são estimados.
-
-Para previsão antes da operação, não usar o resultado do mesmo dia: perdas, estoque final, ruptura, receita, custo total e margem; demanda latente nunca é feature. Preço, promoção, desconto e reposição dependerão de disponibilidade no instante da previsão. Uma fase futura deve definir horizonte, baseline e validação temporal, avaliando MAE/RMSE e, se adequado, MAPE.
-
-Concluído: Fase 1, ETL, EDA inicial, engenharia de atributos, dataset de modelagem e EDA avançada da Sprint 4.
-
-Próxima etapa — Sprint 5: protocolo e validação temporal, baseline, divisão treino/validação/teste, codificação das categorias, treinamento e comparação de modelos, ajuste moderado de hiperparâmetros e modelo serializado.
-
-Futuro — Sprints 6 a 8: interface e integração, beta, UAT e socialização, feedback, manual, relatório e apresentação final. A amostra real depende de autorização e nova auditoria. Ver o [cronograma](docs/cronograma.md); não há datas ou resultados futuros prometidos.
+Há uma investigação separada com dados comerciais reais da Corporación Favorita, família `MEATS`. O alvo `sales` tem unidade física desconhecida e representa vendas agregadas por loja e família. Isso não equivale a vendas por corte em kg, não substitui o Ridge sintético e ainda não fornece evidência de desempenho preditivo em dados reais.
