@@ -35,6 +35,16 @@ python -m venv .venv
 
 O notebook também pode ser aberto com os outputs salvos. Ao executá-lo, ele confere os hashes, reproduz o baseline da validação e os três folds no período de desenvolvimento. A comparação inicial, a seleção e o teste final são carregados dos registros existentes.
 
+## Previsão de um dia à frente
+
+O adaptador `modeling.inference.predict_next_day(historico)` recebe um DataFrame com `data`, `produto_id`, `corte`, `categoria_anatomica`, `perfil_uso` e `quantidade_vendida_kg`. Cada produto precisa dos últimos 28 dias civis completos, com encerramento na mesma data e metadados do catálogo oficial. O retorno traz a data seguinte, a previsão em kg, a referência D−7 e a identificação do modelo sintético. Previsões negativas interrompem o lote com erro explícito e informação do valor.
+
+```powershell
+.\.venv\Scripts\python.exe -B -X utf8 -m modeling.inference
+```
+
+Esse comando demonstra a previsão de **01/09/2026** usando a base sintética encerrada em **31/08/2026**. Para outro histórico, informe o caminho do CSV como argumento. A data prevista acompanha o histórico fornecido.
+
 ## Dados e histórico do projeto
 
 O dataset sintético v1.0.0 cobre 01/09/2025 a 31/08/2026. A base tratada tem 7.665 observações. A matriz de modelagem começa em 29/09/2025, após o período inicial necessário para compor os históricos. A reprodução usa os arquivos fornecidos e os comandos da [documentação da Sprint 4](docs/sprint4_eda_features.md). O gerador original sobrescreve arquivos da base quando executado e fica reservado para referência. O arquivo de auditoria da demanda latente não faz parte das entradas do modelo. [Contrato e tratamento dos dados](data/README.md)
