@@ -50,4 +50,6 @@ Procon Joinville e Epagri-Cepa serviram de referência para preços e contexto r
 
 Os dados são sintéticos. Vendas observadas podem ser limitadas pelo estoque e não representam necessariamente a demanda total. A EDA incluiu o período posteriormente reservado ao teste. Os resultados medem erro de previsão nessa simulação. A generalização para uma operação comercial e a redução de perdas ou rupturas ainda não foram demonstradas. A validação operacional com usuários está pendente.
 
-Há uma investigação separada com dados comerciais reais da Corporación Favorita, família `MEATS`. O alvo `sales` tem unidade física desconhecida e representa vendas agregadas por loja e família. Isso não equivale a vendas por corte em kg, não substitui o Ridge sintético e ainda não fornece evidência de desempenho preditivo em dados reais.
+A Corporación Favorita é um experimento complementar com dados comerciais reais da família `MEATS`. O alvo `sales` representa vendas agregadas por loja e família, com unidade física desconhecida e sem equivalência com vendas por corte bovino em kg. O experimento está na etapa de preparação dos dados. [Guia do experimento Favorita](experiments/favorita/README.md)
+
+Uma futura amostra operacional do açougue depende de autorização. [Plano para dados operacionais reais](docs/plano_dados_reais.md)

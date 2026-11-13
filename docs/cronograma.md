@@ -22,7 +22,7 @@ Os arquivos originais foram inspecionados e preservados. O [registro da Entrega 
 | Sprint | Período | Trabalho | Situação |
 |---|---|---|---|
 | 4 | 28/09–18/10 | EDA avançada, atributos temporais e matriz de modelagem | Concluída. [Evidências da Sprint 4](sprint4_eda_features.md) |
-| 5 | 19/10–08/11 | Baseline, comparação, seleção, avaliação, modelo serializado e caderno | Concluída tecnicamente. Publicação dos complementos pendente. [Evidências e pendências](criterios_aceite.md) |
+| 5 | 19/10–08/11 | Baseline, comparação, seleção, avaliação, modelo serializado e caderno | Implementação e documentação concluídas. Complementos técnicos publicados. [Evidências e pendências acadêmicas](criterios_aceite.md) |
 | 6 | 09/11–21/11 | Interface, integração da inferência e versão beta | Planejada |
 | 7 | 22/11–29/11 | Validação com usuários, feedback e correções | Planejada |
 | 8 | 30/11–06/12 | Relatório final, manual, apresentação e entrega | Planejada |
