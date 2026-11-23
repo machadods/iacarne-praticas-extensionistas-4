@@ -5,7 +5,7 @@ Projeto acadêmico individual de **Ciência de Dados e Inteligência Artificial*
 ## Por onde começar
 
 - [Caderno de modelagem da Sprint 5](notebooks/03_modelagem_validacao.ipynb) reúne a metodologia, o código, as tabelas e os gráficos executados.
-- [Critérios de aceite e evidências](docs/criterios_aceite.md) distingue os critérios da Fase 1 dos resultados e das pendências da Sprint 5.
+- [Critérios de aceite e evidências](docs/criterios_aceite.md) distingue os critérios originais da Fase 1 das evidências e pendências das Sprints 5 e 6.
 - [Cronograma](docs/cronograma.md) situa as etapas concluídas e planejadas.
 
 ## Resultados da Sprint 5
@@ -47,13 +47,45 @@ Esse comando demonstra a previsão de **01/09/2026** usando a base sintética en
 
 ## Dashboard beta local
 
-Após instalar `requirements.txt`, execute na raiz do projeto e abra `http://127.0.0.1:8501`.
+Use Python 3.10.11 e reutilize o `.venv` existente. Para uma instalação nova, a preparação do ambiente está em [Como executar o caderno](#como-executar-o-caderno). Execute na raiz do projeto e abra `http://127.0.0.1:8501`.
 
 ```powershell
 .\.venv\Scripts\python.exe -B -m streamlit run app.py --server.address 127.0.0.1 --browser.gatherUsageStats false
 ```
 
 Selecione um corte, consulte o gráfico e as 28 observações mais recentes e clique em **Prever próximo dia**. A demonstração usa dados sintéticos até 31/08/2026 e prevê 01/09/2026. Também é possível carregar um CSV de até 5 MiB com o contrato descrito acima, processado em memória. A autorização de uso deve ser confirmada pelo responsável pelo arquivo. Os erros de validação e as previsões negativas são apresentados na página.
+
+### Demonstração acadêmica em 3 a 5 minutos
+
+1. Abra o dashboard pelo comando acima.
+2. Explique que o Ridge v1 foi treinado com dados sintéticos de 21 cortes bovinos.
+3. Selecione **Acém** ou **Picanha**.
+4. Mostre as 28 observações de 04/08 a 31/08/2026, a tabela e o gráfico de vendas observadas.
+5. Clique em **Prever próximo dia** e destaque **Previsão para 01/09/2026**.
+6. Compare os cartões Ridge e D−7. Para Acém, mostram 24,420 kg e 22,780 kg. Para Picanha, 9,590 kg e 7,670 kg. O baseline repete a venda do mesmo corte sete dias antes.
+7. Explique que o valor estima a venda observada em kg, que pode ser limitada pelo estoque. A demanda não atendida fica fora do alvo. O erro da previsão só pode ser calculado quando a venda do dia previsto estiver disponível.
+8. Em **CSV autorizado**, carregue `valido.csv` preparado abaixo e gere a previsão de Acém. Depois, carregue `insuficiente.csv` e mostre a rejeição do histórico de 27 dias.
+
+Antes da apresentação, prepare os dois CSVs em outro terminal, na raiz do projeto. O comando usa somente a base sintética tratada e grava as cópias em uma pasta temporária externa ao repositório. O caminho é exibido ao terminar.
+
+```powershell
+@'
+from pathlib import Path
+import tempfile
+import pandas as pd
+from modeling.inference import HISTORY_COLUMNS
+base = pd.read_csv("data/processed/iacarne_vendas_tratado.csv", usecols=list(HISTORY_COLUMNS))
+historico = base.loc[base.produto_id.eq("acem")].tail(28)
+pasta = Path(tempfile.mkdtemp(prefix="iacarne_demo_"))
+historico.to_csv(pasta / "valido.csv", index=False)
+historico.iloc[1:].to_csv(pasta / "insuficiente.csv", index=False)
+print(pasta)
+'@ | .\.venv\Scripts\python.exe -B -
+```
+
+Remova essas cópias temporárias depois da demonstração. O dashboard lê o arquivo enviado em memória, com limite de 5 MiB verificado no upload e antes do processamento.
+
+O fechamento técnico S6-C foi verificado em 23/11/2026 no ambiente atual, com 65 testes aprovados, execução pelo navegador e hashes protegidos conferidos. A [tabela de conformidade da Sprint 6](docs/criterios_aceite.md) registra as evidências e as pendências acadêmicas.
 
 ## Dados e histórico do projeto
 
@@ -68,7 +100,7 @@ Procon Joinville e Epagri-Cepa serviram de referência para preços e contexto r
 
 ## Limites e investigação complementar
 
-Os dados são sintéticos. Vendas observadas podem ser limitadas pelo estoque e não representam necessariamente a demanda total. A EDA incluiu o período posteriormente reservado ao teste. Os resultados medem erro de previsão nessa simulação. A generalização para uma operação comercial e a redução de perdas ou rupturas ainda não foram demonstradas. A validação operacional com usuários está pendente.
+Os dados são sintéticos. Vendas observadas podem ser limitadas pelo estoque e não representam necessariamente a demanda total. A EDA incluiu o período posteriormente reservado ao teste. Os resultados medem erro de previsão nessa simulação. O Ridge v1 ainda não foi validado com vendas reais do supermercado. A generalização para uma operação comercial e a redução de perdas ou rupturas ainda não foram demonstradas. A validação operacional com usuários está pendente.
 
 A Corporación Favorita é um experimento complementar com dados comerciais reais da família `MEATS`. O alvo `sales` representa vendas agregadas por loja e família, com unidade física desconhecida e sem equivalência com vendas por corte bovino em kg. O experimento está na etapa de preparação dos dados. [Guia do experimento Favorita](experiments/favorita/README.md)
 

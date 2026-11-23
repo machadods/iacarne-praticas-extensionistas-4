@@ -23,9 +23,11 @@ Os arquivos originais foram inspecionados e preservados. O [registro da Entrega 
 |---|---|---|---|
 | 4 | 28/09–18/10 | EDA avançada, atributos temporais e matriz de modelagem | Concluída. [Evidências da Sprint 4](sprint4_eda_features.md) |
 | 5 | 19/10–08/11 | Baseline, comparação, seleção, avaliação, modelo serializado e caderno | Implementação e documentação concluídas. Complementos técnicos publicados. [Evidências e pendências acadêmicas](criterios_aceite.md) |
-| 6 | 09/11–21/11 | Interface, integração da inferência e versão beta | Planejada |
+| 6 | 09/11–21/11 | Interface, integração da inferência e versão beta | Beta implementado e publicado. Reprodução local e fechamento S6-C verificados em 23/11/2026. [Evidências e pendências](criterios_aceite.md) |
 | 7 | 22/11–29/11 | Validação com usuários, feedback e correções | Planejada |
 | 8 | 30/11–06/12 | Relatório final, manual, apresentação e entrega | Planejada |
 | Socialização | 08/12 | Apresentação do projeto | Planejada |
 
 O fechamento da Sprint 5 reúne a evidência do experimento sintético. A validação operacional com usuários é prevista para a Sprint 7. Uma futura amostra do açougue depende de autorização e de um contrato de dados próprio.
+
+O fechamento S6-C foi registrado em 23/11/2026, após o período planejado. As datas da tabela seguem o cronograma detalhado do Roteiro de Práticas Extensionistas IV, pp. 4–5. O resumo visual da p. 6 indica 08/11 para o fim da Sprint 6, enquanto a p. 5 indica 21/11. Essa divergência precisa de confirmação docente.
