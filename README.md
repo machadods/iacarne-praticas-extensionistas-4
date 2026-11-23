@@ -45,6 +45,16 @@ O adaptador `modeling.inference.predict_next_day(historico)` recebe um DataFrame
 
 Esse comando demonstra a previsão de **01/09/2026** usando a base sintética encerrada em **31/08/2026**. Para outro histórico, informe o caminho do CSV como argumento. A data prevista acompanha o histórico fornecido.
 
+## Dashboard beta local
+
+Após instalar `requirements.txt`, execute na raiz do projeto e abra `http://127.0.0.1:8501`.
+
+```powershell
+.\.venv\Scripts\python.exe -B -m streamlit run app.py --server.address 127.0.0.1 --browser.gatherUsageStats false
+```
+
+Selecione um corte, consulte o gráfico e as 28 observações mais recentes e clique em **Prever próximo dia**. A demonstração usa dados sintéticos até 31/08/2026 e prevê 01/09/2026. Também é possível carregar um CSV de até 5 MiB com o contrato descrito acima, processado em memória. A autorização de uso deve ser confirmada pelo responsável pelo arquivo. Os erros de validação e as previsões negativas são apresentados na página.
+
 ## Dados e histórico do projeto
 
 O dataset sintético v1.0.0 cobre 01/09/2025 a 31/08/2026. A base tratada tem 7.665 observações. A matriz de modelagem começa em 29/09/2025, após o período inicial necessário para compor os históricos. A reprodução usa os arquivos fornecidos e os comandos da [documentação da Sprint 4](docs/sprint4_eda_features.md). O gerador original sobrescreve arquivos da base quando executado e fica reservado para referência. O arquivo de auditoria da demanda latente não faz parte das entradas do modelo. [Contrato e tratamento dos dados](data/README.md)
